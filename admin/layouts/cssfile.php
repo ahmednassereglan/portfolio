@@ -9,3 +9,10 @@
 <!-- Argon CSS -->
 <link rel="stylesheet" href="../assets/css/argon.css?v=1.2.0" type="text/css">
 <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+<style>
+.skills__icon {
+    font-size: 2rem;
+    margin-right: var(--mb-2);
+    color: var(--first-color);
+}
+</style>

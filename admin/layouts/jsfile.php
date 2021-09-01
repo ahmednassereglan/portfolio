@@ -11,3 +11,6 @@
 <!-- Argon JS -->
 <script src="../assets/js/argon.js?v=1.2.0"></script>
 <script src="https://kit.fontawesome.com/28d30b702d.js" crossorigin="anonymous"></script>
+<script>
+$(".alert").alert()
+</script>

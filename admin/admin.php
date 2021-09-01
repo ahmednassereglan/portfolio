@@ -21,13 +21,7 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
 
     <!--     Fonts and icons     -->
     <?php require "layouts/cssfile.php"; ?>
-    <style>
-    .skills__icon {
-        font-size: 2rem;
-        margin-right: var(--mb-2);
-        color: var(--first-color);
-    }
-    </style>
+
 </head>
 
 <body>

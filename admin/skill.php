@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+require "db/db.php";
+if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
+    header("location: logout.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,7 +54,29 @@
         </div>
         <!-- Page content -->
         <div class="container-fluid mt--6">
+            <div class="row">
+                <?php
+                                        if (isset($_GET['msg'])) {
+                                            $msg=$_GET['msg'];
+                                            $color=$_GET['color'];
 
+                                            if ($msg == 'sucess') {
+                                                $msg= 'Update Sucess';
+                                            } else {
+                                                $msg= 'There is something wrong';
+                                            } ?>
+                <div class="col-8 offset-2">
+                    <div class="alert <?php echo $color ?> alert-dismissible fade show" role="alert">
+                        <strong><?php echo $msg ?></strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                <?php
+                                        }
+                    ?>
+            </div>
             <div class="row mt-4">
                 <div class="col-12">
                     <div class="card">
@@ -61,46 +91,45 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form>
+
+                            <form action="Processes/skile_insert.php" method="post" role="form">
+                                <input type="hidden" name="id" value="<?php echo $_SESSION['user'] ?>">
                                 <h6 class="heading-small text-muted mb-4">Skill information</h6>
                                 <div class="pl-lg-4">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-username">Username</label>
-                                                <input type="text" id="input-username" class="form-control"
-                                                    placeholder="Username" value="lucky.jesse">
+                                                <label class="form-control-label" for="input-username">Name</label>
+                                                <input type="text" name="name" id="input-username" class="form-control"
+                                                    placeholder="Like->( CSS )">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-email">Email
-                                                    address</label>
-                                                <input type="email" id="input-email" class="form-control"
-                                                    placeholder="jesse@example.com">
+                                                <label class="form-control-label" for="input-email">Rate</label>
+                                                <input type="number" name="rate" id="input-email" class="form-control"
+                                                    placeholder="Like->( 90 )">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-8 offset-2 ">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-first-name">First
-                                                    name</label>
-                                                <input type="text" id="input-first-name" class="form-control"
-                                                    placeholder="First name" value="Lucky">
+                                                <label class="form-control-label" for="input-first-name">Icon</label>
+                                                <input type="text" name="icon" id="input-first-name"
+                                                    class="form-control"
+                                                    placeholder="Like->( bx bxl-html5,OR,fab fa-html5 )">
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-last-name">Last
-                                                    name</label>
-                                                <input type="text" id="input-last-name" class="form-control"
-                                                    placeholder="Last name" value="Jesse">
+                                            <div class="text-center">
+                                                <a href="https://boxicons.com/" style="margin-right: 50px;">Boxicons</a>
+                                                <a href="https://fontawesome.com/v5.15/icons/">Font Awesome</a>
                                             </div>
+
                                         </div>
+
                                     </div>
                                 </div>
-
+                                <input type="submit" class="btn btn-primary" value="Add">
                             </form>
                         </div>
                     </div>
@@ -108,38 +137,42 @@
                 <div class="col-12">
                     <div class="card bg-default shadow">
                         <div class="card-header bg-transparent border-0">
-                            <h3 class="text-white mb-0">Skills</h3>
+                            <h3 class="text-white mb-0">skills</h3>
                         </div>
                         <div class="table-responsive">
                             <table class="table align-items-center table-dark table-flush">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th scope="col" class="sort">Name</th>
-                                        <th scope="col" class="sort">rate</th>
-                                        <th scope="col" class="sort">user</th>
-
+                                        <th scope="col" class="sort">Rate</th>
+                                        <th scope="col" class="sort">Rate</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody class="list">
+                                    <?php
+                                $id=$_SESSION['user'];
+                                try{
+                                    require("db/db.php");
+                                    $qry ="SELECT *  FROM skils WHERE user=$id ";
+                                    $verify = mysqli_query($conn,$qry);
+                                    while($row = mysqli_fetch_array($verify,MYSQLI_ASSOC)){
+                                    
+                            ?>
                                     <tr>
                                         <th scope="row">
                                             <div class="media align-items-center">
                                                 <a href="#" class="avatar rounded-circle mr-3">
-                                                    <img alt="Image placeholder"
-                                                        src="../assets/img/theme/bootstrap.jpg">
+                                                    <i class='<?php echo $row['icon'] ?> skills__icon'></i>
                                                 </a>
                                                 <div class="media-body">
-                                                    <span class="name mb-0 text-sm">Argon Design System</span>
+                                                    <span class="name mb-0 text-sm"><?php echo $row['name'] ?></span>
                                                 </div>
                                             </div>
                                         </th>
-                                        <td class="budget">
-                                            $2500 USD
-                                        </td>
 
                                         <td class="budget">
-                                            $2500 USD
+                                            <?php echo $row['rate'] ?>%
                                         </td>
                                         <td class="">
                                             <div class="dropdown">
@@ -155,7 +188,16 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    <?php
 
+                                        
+                                    }
+                                    mysqli_close($conn);
+                                    }
+                                    catch(Exception $e){
+                                        'Caught exception: '.  $e->getMessage(). "\n";
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>

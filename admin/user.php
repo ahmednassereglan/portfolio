@@ -36,16 +36,41 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
 
         <div class="header pb-6 d-flex align-items-center"
             style="min-height: 500px; background-image: url(../assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+
             <!-- Mask -->
             <span class="mask bg-gradient-default opacity-8"></span>
             <!-- Header container -->
-            <div class="container-fluid d-flex align-items-center">
+
+            <div class="container-fluid  align-items-center">
+                <div class="row">
+                    <?php
+                                        if (isset($_GET['msg'])) {
+                                            $msg=$_GET['msg'];
+                                            $color=$_GET['color'];
+
+                                            if ($msg == 'sucess') {
+                                                $msg= 'Update Sucess';
+                                            } else {
+                                                $msg= 'There is something wrong';
+                                            } ?>
+                    <div class="col-8 offset-2">
+                        <div class="alert <?php echo $color ?> alert-dismissible fade show" role="alert">
+                            <strong><?php echo $msg ?></strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <?php
+                                        }
+                    ?>
+                </div>
                 <div class="row">
                     <div class="col-lg-7 col-md-10">
                         <h1 class="display-2 text-white">Hello <?php echo $_SESSION['name'] ?></h1>
                         <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've
                             made with your work and manage your projects or assigned tasks</p>
-                        <a href="#!" class="btn btn-neutral">Edit profile</a>
+
                     </div>
                 </div>
             </div>
@@ -115,9 +140,7 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                 <div class="col-8">
                                     <h3 class="mb-0">Edit profile </h3>
                                 </div>
-                                <div class="col-4 text-right">
-                                    <a href="#!" class="btn btn-sm btn-primary">Settings</a>
-                                </div>
+
                             </div>
                         </div>
                         <div class="card-body">
@@ -259,7 +282,7 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-country">Img</label>
-                                                <input type="file" name="img" id="input-country" class="form-control">
+                                                <input type="file" name="image" id="input-country" class="form-control">
                                             </div>
                                         </div>
 
@@ -275,6 +298,8 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                             name="aboutme"><?php echo $row['aboutme'] ?></textarea>
                                     </div>
                                 </div>
+
+                                <input type="submit" class="btn btn-primary" value="Edit profile">
                             </form>
                             <?php  
                                 }
