@@ -25,21 +25,21 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="skill.php">
-                            <i class="ni ni-pin-3 text-primary"></i>
+                        <a class="nav-link <?php echo $skill ?>" href="skill.php">
+                            <i class="ni ni-diamond text-success "></i>
                             <span class="nav-link-text">Skills</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.html">
-                            <i class="ni ni-single-02 text-yellow"></i>
+                        <a class="nav-link <?php echo $work ?>" href="work.php">
+                            <i class="ni ni-folder-17 text-primary"></i>
                             <span class="nav-link-text">Works</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="tables.html">
+                        <a class="nav-link <?php echo $certificate ?>" href="certificate.php">
                             <i class="ni ni-bullet-list-67 text-default"></i>
-                            <span class="nav-link-text">Descriptions</span>
+                            <span class="nav-link-text">Certificates</span>
                         </a>
                     </li>
                     <li class="nav-item">
