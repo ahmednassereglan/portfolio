@@ -98,23 +98,23 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label"
-                                                    for="input-username">Certificate</label>
-                                                <input type="text" name="name" id="input-username" class="form-control"
-                                                    placeholder="Enter Name Of Certificate">
+                                                    for="input-Certificate">Certificate</label>
+                                                <input type="text" name="name" id="input-Certificate"
+                                                    class="form-control" placeholder="Enter Name Of Certificate">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-country">Img</label>
-                                                <input type="file" name="image" id="input-country" class="form-control">
+                                                <label class="form-control-label" for="input-image">Img</label>
+                                                <input type="file" name="image" id="input-image" class="form-control">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-8 offset-2 ">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-first-name">date</label>
-                                                <input type="date" name="datecer" id="input-first-name"
+                                                <label class="form-control-label" for="input-datecer">date</label>
+                                                <input type="date" name="datecer" id="input-datecer"
                                                     class="form-control">
                                             </div>
 
