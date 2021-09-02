@@ -25,7 +25,7 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
 <body>
 
     <!-- Sidenav -->
-    <?php $certificate='active' ?>
+    <?php $withme='active' ?>
     <?php require "layouts/slider.php"; ?>
 
     <div class="main-content" id="panel">
@@ -60,11 +60,11 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                             $msg=$_GET['msg'];
                                             $color=$_GET['color'];
 
-                                            // if ($msg == 'sucess') {
-                                            //     $msg= 'Update Sucess';
-                                            // } else {
-                                            //     $msg= 'There is something wrong';
-                                            // } ?>
+                                            if ($msg == 'sucess') {
+                                                $msg= 'Update Sucess';
+                                            } else {
+                                                $msg= 'There is something wrong';
+                                            } ?>
                 <div class="col-8 offset-2">
                     <div class="alert <?php echo $color ?> alert-dismissible fade show" role="alert">
                         <strong><?php echo $msg ?></strong>
@@ -83,38 +83,46 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">Add Certificate </h3>
+                                    <h3 class="mb-0">Add Skill </h3>
                                 </div>
-
+                                <div class="col-4 text-right">
+                                    <a href="#!" class="btn btn-sm btn-primary">Settings</a>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">
 
-                            <form action="Processes/certificate_insert.php" method="POST">
-                                <input type="hidden" name="idd" value="<?php echo $_SESSION['user'] ?>">
-                                <h6 class="heading-small text-muted mb-4">Certificate information</h6>
+                            <form action="Processes/skile_insert.php" method="post" role="form">
+                                <input type="hidden" name="id" value="<?php echo $_SESSION['user'] ?>">
+                                <h6 class="heading-small text-muted mb-4">Skill information</h6>
                                 <div class="pl-lg-4">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label"
-                                                    for="input-Certificate">Certificate</label>
-                                                <input type="text" name="named" id="input-Certificate"
-                                                    class="form-control" placeholder="Enter Name Of Certificate">
+                                                <label class="form-control-label" for="input-username">Name</label>
+                                                <input type="text" name="name" id="input-username" class="form-control"
+                                                    placeholder="Like->( CSS )">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-image">Img</label>
-                                                <input type="file" name="imaged" id="input-image" class="form-control">
+                                                <label class="form-control-label" for="input-email">Rate</label>
+                                                <input type="number" name="rate" id="input-email" class="form-control"
+                                                    placeholder="Like->( 90 )">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-8 offset-2 ">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-datecer">date</label>
-                                                <input type="date" name="dated" id="input-datecer" class="form-control">
+                                                <label class="form-control-label" for="input-first-name">Icon</label>
+                                                <input type="text" name="icon" id="input-first-name"
+                                                    class="form-control"
+                                                    placeholder="Like->( bx bxl-html5,OR,fab fa-html5 )">
+                                            </div>
+                                            <div class="text-center">
+                                                <a href="https://boxicons.com/" style="margin-right: 50px;">Boxicons</a>
+                                                <a href="https://fontawesome.com/v5.15/icons/">Font Awesome</a>
                                             </div>
 
                                         </div>
@@ -129,15 +137,15 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                 <div class="col-12">
                     <div class="card bg-default shadow">
                         <div class="card-header bg-transparent border-0">
-                            <h3 class="text-white mb-0">Work</h3>
+                            <h3 class="text-white mb-0">skills</h3>
                         </div>
                         <div class="table-responsive">
                             <table class="table align-items-center table-dark table-flush">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th scope="col" class="sort">Certificate</th>
-                                        <th scope="col" class="sort">Date</th>
-
+                                        <th scope="col" class="sort">Name</th>
+                                        <th scope="col" class="sort">Rate</th>
+                                        <th scope="col" class="sort">Rate</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -146,7 +154,7 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                 $id=$_SESSION['user'];
                                 try{
                                     require("db/db.php");
-                                    $qry ="SELECT *  FROM certificate WHERE user=$id ";
+                                    $qry ="SELECT *  FROM skils WHERE user=$id ";
                                     $verify = mysqli_query($conn,$qry);
                                     while($row = mysqli_fetch_array($verify,MYSQLI_ASSOC)){
                                     
@@ -154,24 +162,18 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                     <tr>
                                         <th scope="row">
                                             <div class="media align-items-center">
-                                                <a href="#" class="mr-3">
-                                                    <img alt="Image placeholder"
-                                                        src="../assets/img/<?php echo $row['img'] ?>"
-                                                        style="width: 200px;height: 200px; border-radius: 50%;">
+                                                <a href="#" class="avatar rounded-circle mr-3">
+                                                    <i class='<?php echo $row['icon'] ?> skills__icon'></i>
                                                 </a>
                                                 <div class="media-body">
-                                                    <a href="#">
-                                                        <span
-                                                            class="name mb-0 text-sm text-white"><?php echo $row['name'] ?>
-                                                        </span>
-                                                    </a>
+                                                    <span class="name mb-0 text-sm"><?php echo $row['name'] ?></span>
                                                 </div>
                                             </div>
                                         </th>
-                                        <td class="budget">
-                                            <?php echo $row['date'] ?>
-                                        </td>
 
+                                        <td class="budget">
+                                            <?php echo $row['rate'] ?>%
+                                        </td>
                                         <td class="">
                                             <div class="dropdown">
                                                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"

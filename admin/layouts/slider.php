@@ -32,7 +32,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo $work ?>" href="work.php">
-                            <i class="ni ni-folder-17 text-primary"></i>
+                            <i class="ni ni-briefcase-24 text-primary"></i>
                             <span class="nav-link-text">Works</span>
                         </a>
                     </li>
@@ -43,13 +43,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">
-                            <i class="ni ni-key-25 text-info"></i>
+                        <a class="nav-link <?php echo $contact ?>" href="contact.php">
+                            <i class="ni ni-badge text-info"></i>
                             <span class="nav-link-text">Contact</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="register.html">
+                        <a class="nav-link <?php echo $withme ?>" href="contactwithme.php">
                             <i class="ni ni-circle-08 text-pink"></i>
                             <span class="nav-link-text">Notifications</span>
                         </a>

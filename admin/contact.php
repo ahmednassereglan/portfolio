@@ -25,7 +25,7 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
 <body>
 
     <!-- Sidenav -->
-    <?php $certificate='active' ?>
+    <?php $contact='active' ?>
     <?php require "layouts/slider.php"; ?>
 
     <div class="main-content" id="panel">
@@ -60,11 +60,11 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                             $msg=$_GET['msg'];
                                             $color=$_GET['color'];
 
-                                            // if ($msg == 'sucess') {
-                                            //     $msg= 'Update Sucess';
-                                            // } else {
-                                            //     $msg= 'There is something wrong';
-                                            // } ?>
+                                            if ($msg == 'sucess') {
+                                                $msg= 'Update Sucess';
+                                            } else {
+                                                $msg= 'There is something wrong';
+                                            } ?>
                 <div class="col-8 offset-2">
                     <div class="alert <?php echo $color ?> alert-dismissible fade show" role="alert">
                         <strong><?php echo $msg ?></strong>
@@ -78,48 +78,103 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                     ?>
             </div>
             <div class="row mt-4">
-                <div class="col-12">
+                <div class="col-6">
                     <div class="card">
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">Add Certificate </h3>
+                                    <h3 class="mb-0">Add Contact Type </h3>
                                 </div>
 
                             </div>
                         </div>
                         <div class="card-body">
 
-                            <form action="Processes/certificate_insert.php" method="POST">
-                                <input type="hidden" name="idd" value="<?php echo $_SESSION['user'] ?>">
-                                <h6 class="heading-small text-muted mb-4">Certificate information</h6>
+                            <form action="Processes/contacttype_insert.php" method="post" role="form">
+
+                                <h6 class="heading-small text-muted mb-4">Contact Type information</h6>
                                 <div class="pl-lg-4">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label"
-                                                    for="input-Certificate">Certificate</label>
-                                                <input type="text" name="named" id="input-Certificate"
-                                                    class="form-control" placeholder="Enter Name Of Certificate">
+                                                <label class="form-control-label" for="input-username">Name</label>
+                                                <input type="text" name="name" id="input-username" class="form-control"
+                                                    placeholder="facebook,github...">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-image">Img</label>
-                                                <input type="file" name="imaged" id="input-image" class="form-control">
+                                                <label class="form-control-label" for="input-first-name">Icon</label>
+                                                <input type="text" name="icon" id="input-first-name"
+                                                    class="form-control"
+                                                    placeholder="Like->( bx bxl-html5,OR,fab fa-html5 )">
+                                            </div>
+                                            <div class="text-center">
+                                                <a style="margin-right: 10px;"
+                                                    href="https://fontawesome.com/v5.15/icons/">Font Awesome</a>
+                                                <a href="https://boxicons.com/">Boxicons</a>
                                             </div>
                                         </div>
                                     </div>
+
+                                </div>
+                                <input type="submit" class="btn btn-primary" value="Add">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h3 class="mb-0">Add Contact </h3>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <form action="Processes/contact_insert.php" method="post" role="form">
+                                <input type="hidden" name="id" value="<?php echo $_SESSION['user'] ?>">
+                                <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                                <div class="pl-lg-4">
                                     <div class="row">
-                                        <div class="col-lg-8 offset-2 ">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-datecer">date</label>
-                                                <input type="date" name="dated" id="input-datecer" class="form-control">
+                                                <label class="form-control-label" for="input-username">Name</label>
+                                                <input type="text" name="name" id="input-username" class="form-control"
+                                                    placeholder="ex@exmpl.com">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-city">Type</label>
+                                                <select name="type" class="form-control" required>
+                                                    <?php
+                                                    try{
+                                                        require("db/db.php");
+                                                        $qry ="SELECT *  FROM contacttype";
+                                                        $verify = mysqli_query($conn,$qry);
+                                                        while($row = mysqli_fetch_array($verify,MYSQLI_ASSOC)){
+                                                        
+                                                    ?>
+                                                    <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?>
+                                                    </option>
+                                                    <?php
+                                                    }
+                                                    mysqli_close($conn);
+                                                    }
+                                                    catch(Exception $e){
+                                                        'Caught exception: '.  $e->getMessage(). "\n";
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
 
                                         </div>
-
                                     </div>
+
                                 </div>
                                 <input type="submit" class="btn btn-primary" value="Add">
                             </form>
@@ -129,14 +184,14 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                 <div class="col-12">
                     <div class="card bg-default shadow">
                         <div class="card-header bg-transparent border-0">
-                            <h3 class="text-white mb-0">Work</h3>
+                            <h3 class="text-white mb-0">skills</h3>
                         </div>
                         <div class="table-responsive">
                             <table class="table align-items-center table-dark table-flush">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th scope="col" class="sort">Certificate</th>
-                                        <th scope="col" class="sort">Date</th>
+                                        <th scope="col" class="sort">Contact</th>
+                                        <th scope="col" class="sort">Content</th>
 
                                         <th scope="col"></th>
                                     </tr>
@@ -146,32 +201,43 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                 $id=$_SESSION['user'];
                                 try{
                                     require("db/db.php");
-                                    $qry ="SELECT *  FROM certificate WHERE user=$id ";
+                                    $qry ="SELECT *  FROM contact WHERE user=$id ";
                                     $verify = mysqli_query($conn,$qry);
                                     while($row = mysqli_fetch_array($verify,MYSQLI_ASSOC)){
+                                        $type =$row['type'];
+                                        
                                     
                             ?>
                                     <tr>
                                         <th scope="row">
+                                            <?php
+                                            try{
+                                                $qryy ="SELECT *  FROM contacttype WHERE id=$type ";
+                                                $verifyy = mysqli_query($conn,$qryy);
+                                                $roww = mysqli_fetch_assoc($verifyy);
+
+                                            ?>
                                             <div class="media align-items-center">
-                                                <a href="#" class="mr-3">
-                                                    <img alt="Image placeholder"
-                                                        src="../assets/img/<?php echo $row['img'] ?>"
-                                                        style="width: 200px;height: 200px; border-radius: 50%;">
+                                                <a href="#" class="avatar rounded-circle mr-3">
+                                                    <i class='<?php echo $roww['icon'] ?> skills__icon'></i>
                                                 </a>
                                                 <div class="media-body">
-                                                    <a href="#">
-                                                        <span
-                                                            class="name mb-0 text-sm text-white"><?php echo $row['name'] ?>
-                                                        </span>
-                                                    </a>
+                                                    <span class="name mb-0 text-sm"><?php echo $roww['name'] ?></span>
                                                 </div>
                                             </div>
                                         </th>
-                                        <td class="budget">
-                                            <?php echo $row['date'] ?>
-                                        </td>
+                                        <?php
+                                            
+                                            
+                                            }
+                                            catch(Exception $e){
+                                                'Caught exception: '.  $e->getMessage(). "\n";
+                                            }
+                                            ?>
 
+                                        <td class="budget">
+                                            <?php echo $row['content'] ?>
+                                        </td>
                                         <td class="">
                                             <div class="dropdown">
                                                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
