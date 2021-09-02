@@ -38,122 +38,75 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
-                        <i class="ni ni-bell-55"></i>
+                        <?php
+                        try{
+                            $id=$_SESSION['user'];
+                            require("db/db.php");
+                            $qrycount ="SELECT COUNT(id)AS conter FROM `contactwithme`  WHERE id=$id and status=0  ";
+                            $verifycount = mysqli_query($conn,$qrycount);
+                            $rowcount = mysqli_fetch_assoc($verifycount);
+                            mysqli_close($conn);
+                        }
+                        catch(Exception $e){
+                            'Caught exception: '.  $e->getMessage(). "\n";
+                        }
+                        ?>
+                        <i class="ni ni-bell-55"><span
+                                class="badge badge-danger"><?php echo $rowcount['conter'] ?></span></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
                         <!-- Dropdown header -->
                         <div class="px-3 py-3">
-                            <h6 class="text-sm text-muted m-0">You have <strong class="text-primary">13</strong>
+                            <h6 class="text-sm text-muted m-0">You have <strong
+                                    class="text-primary"><?php echo $rowcount['conter'] ?></strong>
                                 notifications.</h6>
                         </div>
                         <!-- List group -->
                         <div class="list-group list-group-flush">
-                            <a href="#!" class="list-group-item list-group-item-action">
+                            <?php
+                            $id=$_SESSION['user'];
+                            try{
+                                require("db/db.php");
+                                $qry ="SELECT *  FROM contactwithme WHERE user=$id and status=0 ";
+                                $verify = mysqli_query($conn,$qry);
+                                while($row = mysqli_fetch_array($verify,MYSQLI_ASSOC)){
+                                
+                            ?>
+                            <a href="Processes/notification.php?idemail=<?php echo $row['id'] ?>"
+                                class="list-group-item list-group-item-action">
                                 <div class="row align-items-center">
                                     <div class="col-auto">
                                         <!-- Avatar -->
-                                        <img alt="Image placeholder" src="../assets/img/theme/team-1.jpg"
+                                        <img alt="Image placeholder" src="../assets/img/avatar.png"
                                             class="avatar rounded-circle">
                                     </div>
                                     <div class="col ml--2">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div>
-                                                <h4 class="mb-0 text-sm">John Snow</h4>
+                                                <h4 class="mb-0 text-sm"><?php echo $row['name'] ?></h4>
                                             </div>
                                             <div class="text-right text-muted">
-                                                <small>2 hrs ago</small>
+                                                <small class="text-primary"><?php echo $row['email'] ?></small>
                                             </div>
                                         </div>
-                                        <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
+                                        <p class="text-sm mb-0"><?php echo $row['content'] ?></p>
                                     </div>
                                 </div>
                             </a>
-                            <a href="#!" class="list-group-item list-group-item-action">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <!-- Avatar -->
-                                        <img alt="Image placeholder" src="../assets/img/theme/team-2.jpg"
-                                            class="avatar rounded-circle">
-                                    </div>
-                                    <div class="col ml--2">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <h4 class="mb-0 text-sm">John Snow</h4>
-                                            </div>
-                                            <div class="text-right text-muted">
-                                                <small>3 hrs ago</small>
-                                            </div>
-                                        </div>
-                                        <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#!" class="list-group-item list-group-item-action">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <!-- Avatar -->
-                                        <img alt="Image placeholder" src="../assets/img/theme/team-3.jpg"
-                                            class="avatar rounded-circle">
-                                    </div>
-                                    <div class="col ml--2">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <h4 class="mb-0 text-sm">John Snow</h4>
-                                            </div>
-                                            <div class="text-right text-muted">
-                                                <small>5 hrs ago</small>
-                                            </div>
-                                        </div>
-                                        <p class="text-sm mb-0">Your posts have been liked a lot.</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#!" class="list-group-item list-group-item-action">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <!-- Avatar -->
-                                        <img alt="Image placeholder" src="../assets/img/theme/team-4.jpg"
-                                            class="avatar rounded-circle">
-                                    </div>
-                                    <div class="col ml--2">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <h4 class="mb-0 text-sm">John Snow</h4>
-                                            </div>
-                                            <div class="text-right text-muted">
-                                                <small>2 hrs ago</small>
-                                            </div>
-                                        </div>
-                                        <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#!" class="list-group-item list-group-item-action">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <!-- Avatar -->
-                                        <img alt="Image placeholder" src="../assets/img/theme/team-5.jpg"
-                                            class="avatar rounded-circle">
-                                    </div>
-                                    <div class="col ml--2">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <h4 class="mb-0 text-sm">John Snow</h4>
-                                            </div>
-                                            <div class="text-right text-muted">
-                                                <small>3 hrs ago</small>
-                                            </div>
-                                        </div>
-                                        <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
-                                    </div>
-                                </div>
-                            </a>
+                            <?php   
+                            }
+                            mysqli_close($conn);
+                            }
+                            catch(Exception $e){
+                                'Caught exception: '.  $e->getMessage(). "\n";
+                            }
+                            ?>
+
                         </div>
-                        <!-- View all -->
-                        <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View all</a>
+                        <!-- <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View all</a> -->
                     </div>
                 </li>
-                <li class="nav-item dropdown">
+                <!-- <li class="nav-item dropdown">
                     <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                         <i class="ni ni-ungroup"></i>
@@ -198,7 +151,7 @@
                             </a>
                         </div>
                     </div>
-                </li>
+                </li> -->
             </ul>
             <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
                 <li class="nav-item dropdown">

@@ -89,8 +89,8 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                 <thead class="thead-dark">
                                     <tr>
                                         <th scope="col" class="sort">Name</th>
-                                        <th scope="col" class="sort">Rate</th>
-                                        <th scope="col" class="sort">Rate</th>
+                                        <th scope="col" class="sort">email</th>
+                                        <th scope="col" class="sort">content</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -99,7 +99,7 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                 $id=$_SESSION['user'];
                                 try{
                                     require("db/db.php");
-                                    $qry ="SELECT *  FROM skils WHERE user=$id ";
+                                    $qry ="SELECT *  FROM contactwithme WHERE user=$id ";
                                     $verify = mysqli_query($conn,$qry);
                                     while($row = mysqli_fetch_array($verify,MYSQLI_ASSOC)){
                                     
@@ -107,9 +107,6 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                     <tr>
                                         <th scope="row">
                                             <div class="media align-items-center">
-                                                <a href="#" class="avatar rounded-circle mr-3">
-                                                    <i class='<?php echo $row['icon'] ?> skills__icon'></i>
-                                                </a>
                                                 <div class="media-body">
                                                     <span class="name mb-0 text-sm"><?php echo $row['name'] ?></span>
                                                 </div>
@@ -117,7 +114,10 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                         </th>
 
                                         <td class="budget">
-                                            <?php echo $row['rate'] ?>%
+                                            <?php echo $row['email'] ?>
+                                        </td>
+                                        <td class="budget">
+                                            <?php echo $row['content'] ?>
                                         </td>
                                         <td class="">
                                             <div class="dropdown">
