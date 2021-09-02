@@ -35,7 +35,7 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
         <!-- Header -->
 
         <div class="header pb-6 d-flex align-items-center"
-            style="min-height: 500px; background-image: url(../assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+            style="min-height: 500px; background-image: url(../assets/img/<?php echo $_SESSION['userImg'] ?>); background-size: cover; background-position: center top;">
 
             <!-- Mask -->
             <span class="mask bg-gradient-default opacity-8"></span>
@@ -86,15 +86,16 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                             <div class="col-lg-3 order-lg-2">
                                 <div class="card-profile-image">
                                     <a href="#">
-                                        <img src="../assets/img/theme/team-4.jpg" class="rounded-circle">
+                                        <img src="../assets/img/<?php echo $_SESSION['userImg'] ?>"
+                                            class="rounded-circle">
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                             <div class="d-flex justify-content-between">
-                                <a href="#" class="btn btn-sm btn-info  mr-4 ">Connect</a>
-                                <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+                                <a href="work.php" class="btn btn-sm btn-info  mr-4 ">Work</a>
+                                <a href="skill.php" class="btn btn-sm btn-default float-right">Skill</a>
                             </div>
                         </div>
                         <div class="card-body pt-0">
@@ -102,32 +103,86 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                 <div class="col">
                                     <div class="card-profile-stats d-flex justify-content-center">
                                         <div>
-                                            <span class="heading">22</span>
-                                            <span class="description">Friends</span>
+                                            <?php
+                                        try{
+                                            $id=$_SESSION['user'];
+                                            require("db/db.php");
+                                            $qrywork ="SELECT COUNT(id)AS workconter FROM `work`  WHERE user=$id  ";
+                                            $verifywork = mysqli_query($conn,$qrywork);
+                                            $rowwork = mysqli_fetch_assoc($verifywork);
+                                            mysqli_close($conn);
+                                        }
+                                        catch(Exception $e){
+                                            'Caught exception: '.  $e->getMessage(). "\n";
+                                        }
+                                        ?>
+                                            <span class="heading"><?php echo $rowwork['workconter'] ?></span>
+                                            <span class="description">Works</span>
                                         </div>
                                         <div>
-                                            <span class="heading">10</span>
-                                            <span class="description">Photos</span>
+                                            <?php
+                                        try{
+                                            $id=$_SESSION['user'];
+                                            require("db/db.php");
+                                            $qryskill ="SELECT COUNT(id)AS skillconter FROM `skils`  WHERE user=$id  ";
+                                            $verifyskill = mysqli_query($conn,$qryskill);
+                                            $rowskill = mysqli_fetch_assoc($verifyskill);
+                                            mysqli_close($conn);
+                                        }
+                                        catch(Exception $e){
+                                            'Caught exception: '.  $e->getMessage(). "\n";
+                                        }
+                                        ?>
+                                            <span class="heading"><?php echo $rowskill['skillconter'] ?></span>
+                                            <span class="description">Skills</span>
                                         </div>
                                         <div>
-                                            <span class="heading">89</span>
-                                            <span class="description">Comments</span>
+                                            <?php
+                                        try{
+                                            $id=$_SESSION['user'];
+                                            require("db/db.php");
+                                            $qrycertif ="SELECT COUNT(id)AS certifconter FROM `certificate`  WHERE user=$id  ";
+                                            $verifycertif = mysqli_query($conn,$qrycertif);
+                                            $rowcertif = mysqli_fetch_assoc($verifycertif);
+                                            mysqli_close($conn);
+                                        }
+                                        catch(Exception $e){
+                                            'Caught exception: '.  $e->getMessage(). "\n";
+                                        }
+                                        ?>
+                                            <span class="heading"><?php echo $rowcertif['certifconter'] ?></span>
+                                            <span class="description">Certificates</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="text-center">
+                                <?php
+                                        try{
+                                            $id=$_SESSION['user'];
+                                            require("db/db.php");
+                                            $qryuser ="SELECT *  FROM user WHERE id=$id LIMIT 1";
+                                            $verifyuser = mysqli_query($conn,$qryuser);
+                                            $rowuser = mysqli_fetch_assoc($verifyuser);
+                                            mysqli_close($conn);
+                                        }
+                                        catch(Exception $e){
+                                            'Caught exception: '.  $e->getMessage(). "\n";
+                                        }
+                                        ?>
                                 <h5 class="h3">
-                                    Jessica Jones<span class="font-weight-light">, 27</span>
+                                    <?php echo $rowuser['name'] ?><span class="font-weight-light"> ,
+                                        <?php echo $rowuser['age'] ?></span>
                                 </h5>
                                 <div class="h5 font-weight-300">
-                                    <i class="ni location_pin mr-2"></i>Bucharest, Romania
+                                    <i class="ni location_pin mr-2"></i><?php echo $rowuser['country'] ?> -
+                                    <?php echo $rowuser['city'] ?> - <?php echo $rowuser['address'] ?>
                                 </div>
                                 <div class="h5 mt-4">
-                                    <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+                                    <i class="ni business_briefcase-24 mr-2"></i><?php echo $rowuser['job'] ?>
                                 </div>
                                 <div>
-                                    <i class="ni education_hat mr-2"></i>University of Computer Science
+                                    <i class="ni education_hat mr-2"></i><?php echo $rowuser['qualification'] ?>
                                 </div>
                             </div>
                         </div>
