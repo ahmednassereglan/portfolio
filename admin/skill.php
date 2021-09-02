@@ -158,7 +158,7 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                     $verify = mysqli_query($conn,$qry);
                                     while($row = mysqli_fetch_array($verify,MYSQLI_ASSOC)){
                                     
-                            ?>
+                                    ?>
                                     <tr>
                                         <th scope="row">
                                             <div class="media align-items-center">
