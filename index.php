@@ -18,122 +18,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <?php require "resourse/cssfile.php"; ?>
 
-    <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
-    <!-- =====BOX ICONS===== -->
-    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
     <title>Portfolio website complete</title>
-    <style>
-    #myImgcer {
-        border-radius: 5px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
 
-    #myImgcer:hover {
-        opacity: 0.7;
-    }
-
-    /* The Modal (background) */
-    .modalcer {
-        display: none;
-        /* Hidden by default */
-        position: fixed;
-        /* Stay in place */
-        z-index: 1;
-        /* Sit on top */
-        padding-top: 100px;
-        /* Location of the box */
-        left: 0;
-        top: 0;
-        width: 100%;
-        /* Full width */
-        height: 100%;
-        /* Full height */
-        overflow: auto;
-        /* Enable scroll if needed */
-        background-color: rgb(0, 0, 0);
-        /* Fallback color */
-        background-color: rgba(0, 0, 0, 0.9);
-        /* Black w/ opacity */
-    }
-
-    /* Modal Content (image) */
-    .modal-contentcer {
-        margin: auto;
-        display: block;
-        width: 80%;
-        max-width: 700px;
-    }
-
-    /* Caption of Modal Image */
-    #captioncer {
-        margin: auto;
-        display: block;
-        width: 80%;
-        max-width: 700px;
-        text-align: center;
-        color: #ccc;
-        padding: 10px 0;
-        height: 150px;
-    }
-
-    /* Add Animation */
-    .modal-contentcer,
-    #captioncer {
-        -webkit-animation-name: zoom;
-        -webkit-animation-duration: 0.6s;
-        animation-name: zoom;
-        animation-duration: 0.6s;
-    }
-
-    @-webkit-keyframes zoom {
-        from {
-            -webkit-transform: scale(0)
-        }
-
-        to {
-            -webkit-transform: scale(1)
-        }
-    }
-
-    @keyframes zoom {
-        from {
-            transform: scale(0)
-        }
-
-        to {
-            transform: scale(1)
-        }
-    }
-
-    /* The Close Button */
-    .closecer {
-        position: absolute;
-        top: 15px;
-        right: 35px;
-        color: #f1f1f1;
-        font-size: 40px;
-        font-weight: bold;
-        transition: 0.3s;
-    }
-
-    .closecer:hover,
-    .closecer:focus {
-        color: #bbb;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-    /* 100% Image Width on Smaller Screens */
-    @media only screen and (max-width: 700px) {
-        .modal-contentcer {
-            width: 100%;
-        }
-    }
-    </style>
 </head>
 
 <body>
@@ -154,6 +43,7 @@
                     <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
                     <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
                     <li class="nav__item"><a href="#work" class="nav__link">Work</a></li>
+                    <li class="nav__item"><a href="#certificate" class="nav__link">Certificate</a></li>
                     <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
                 </ul>
             </div>
@@ -176,13 +66,57 @@
             </div>
 
             <div class="home__social">
-                <a href="" class="home__social-icon"><i class='bx bxl-linkedin'></i></a>
-                <a href="" class="home__social-icon"><i class='bx bxl-behance'></i></a>
-                <a href="" class="home__social-icon"><i class='bx bxl-github'></i></a>
+                <?php
+                $idicon=$row['id'];
+                try{
+                    require("admin/db/db.php");
+                    $qryicon ="SELECT *  FROM contact WHERE user=$idicon ";
+                    $verifyicon = mysqli_query($conn,$qryicon);
+                    while($rowicon = mysqli_fetch_array($verifyicon,MYSQLI_ASSOC)){
+                        $typecont =$rowicon['type'];
+
+                        if ($rowicon['type'] == 1 || $rowicon['type'] == 7 || $rowicon['type'] == 6 || $rowicon['type'] == 5) {
+                            ?>
+                <?php
+            try {
+                $qryycont ="SELECT *  FROM contacttype WHERE id=$typecont ";
+                $verifyycont = mysqli_query($conn, $qryycont);
+                $rowwcont = mysqli_fetch_assoc($verifyycont); ?>
+                <a data-toggle="tooltip" data-placement="top" title="<?php echo $rowicon['content']?>" href=""
+                    class="home__social-icon"><i class='<?php echo $rowwcont['icon'] ?>'></i></a>
+                <?php
+            } catch (Exception $e) {
+                'Caught exception: '.  $e->getMessage(). "\n";
+            } ?>
+                <?php
+                        }else{
+                            try {
+                                $qryycont ="SELECT *  FROM contacttype WHERE id=$typecont ";
+                                $verifyycont = mysqli_query($conn, $qryycont);
+                                $rowwcont = mysqli_fetch_assoc($verifyycont); ?>
+                <a target="_blank" href="<?php echo $rowicon['content']?>" class="home__social-icon"><i
+                        class='<?php echo $rowwcont['icon'] ?>'></i></a>
+
+                <?php
+                            } catch (Exception $e) {
+                                'Caught exception: '.  $e->getMessage(). "\n";
+                            } ?>
+
+
+
+                <?php 
+                }                       
+            }
+            mysqli_close($conn);
+            }
+            catch(Exception $e){
+                'Caught exception: '.  $e->getMessage(). "\n";
+            }
+                ?>
             </div>
 
             <div class="home__img">
-                <img src="assets/img/perfilahmed.png" alt="">
+                <img src="assets/img/perfilahmed1.png" alt="">
             </div>
         </section>
 
@@ -209,29 +143,28 @@
             <div class="skills__container bd-grid">
                 <div>
                     <h2 class="skills__subtitle">Profesional Skills</h2>
-                    <p class="skills__text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit optio id
-                        vero amet, alias architecto consectetur error eum eaque sit.</p>
+                    <p class="skills__text"></p>
                     <?php
-                            $id=$row['id'];
+                            $ids=$row['id'];
                             try{
                                 require("admin/db/db.php");
-                                $qry ="SELECT *  FROM skils WHERE user=$id ";
-                                $verify = mysqli_query($conn,$qry);
-                                while($row = mysqli_fetch_array($verify,MYSQLI_ASSOC)){
-                                    $skillrate=$row['rate'];
+                                $qrys ="SELECT *  FROM skils WHERE user=$ids ";
+                                $verifys = mysqli_query($conn,$qrys);
+                                while($rows = mysqli_fetch_array($verifys,MYSQLI_ASSOC)){
+                                    $skillrate=$rows['rate'];
                             
                         ?>
                     <div class="skills__data">
 
                         <div class="skills__names">
-                            <i class="<?php echo $row['icon'] ?> skills__icon"></i>
-                            <span class="skills__name"><?php echo $row['name'] ?></span>
+                            <i class="<?php echo $rows['icon'] ?> skills__icon"></i>
+                            <span class="skills__name"><?php echo $rows['name'] ?></span>
                         </div>
-                        <div style="width: <?php echo $row['rate'] ?>%" class="skills__bar">
+                        <div style="width: <?php echo $rows['rate'] ?>%" class="skills__bar">
 
                         </div>
                         <div>
-                            <span class="skills__percentage"><?php echo $row['rate'] ?>%</span>
+                            <span class="skills__percentage"><?php echo $rows['rate'] ?>%</span>
                         </div>
 
                     </div>
@@ -252,68 +185,131 @@
             </div>
         </section>
 
+
         <!--===== WORK =====-->
         <section class="work section" id="work">
             <h2 class="section-title">Work</h2>
 
             <div class="work__container bd-grid">
+                <!-- Button trigger modal -->
+                <?php
+                    $idw=$row['id'];
+                    try{
+                        require("admin/db/db.php");
+                        $qryw ="SELECT *  FROM work WHERE user=$idw ";
+                        $verifyw = mysqli_query($conn,$qryw);
+                        while($roww = mysqli_fetch_array($verifyw,MYSQLI_ASSOC)){
+                            
+                    
+                ?>
                 <div class="work__img">
-                    <img src="assets/img/work1.jpg" alt="">
+                    <img src="assets/img/<?php echo $roww['img'] ?>" alt="" data-toggle="modal"
+                        data-target="#exampleModal<?php echo $roww['id'] ?>">
                 </div>
-                <div class="work__img">
-                    <img src="assets/img/work2.jpg" alt="">
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal<?php echo $roww['id'] ?>" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel<?php echo $roww['id'] ?>" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content" style="width: 700px; margin-left: -100px;">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel<?php echo $roww['id'] ?>">
+                                    <?php echo $roww['name'] ?></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="width: 700px;">
+                                <a target="_blank" href="<?php echo $roww['link'] ?>">
+                                    <img style="width: 700px;height: 500px;" src="assets/img/<?php echo $roww['img'] ?>"
+                                        alt="<?php echo $roww['name'] ?>">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="work__img">
-                    <img src="assets/img/work3.jpg" alt="">
-                </div>
-                <div class="work__img">
-                    <img src="assets/img/work4.jpg" alt="">
-                </div>
-                <div class="work__img">
-                    <img src="assets/img/work5.jpg" alt="">
-                </div>
-                <div class="work__img">
-                    <img src="assets/img/work6.jpg" alt="">
-                </div>
+                <?php   
+                    }
+                    mysqli_close($conn);
+                    }
+                    catch(Exception $e){
+                        'Caught exception: '.  $e->getMessage(). "\n";
+                    }
+                ?>
+
             </div>
         </section>
 
-        <!--===== WORK =====-->
-        <section class="work section" id="work">
+        <!--===== Certificate =====-->
+        <section class="work section" id="certificate">
             <h2 class="section-title">Certificate</h2>
 
             <div class="work__container bd-grid">
+                <!-- Button trigger modal -->
+                <?php
+                    $idc=$row['id'];
+                    try{
+                        require("admin/db/db.php");
+                        $qryc ="SELECT *  FROM `certificate` WHERE user=$idc ";
+                        $verifyc = mysqli_query($conn,$qryc);
+                        while($rowc = mysqli_fetch_array($verifyc,MYSQLI_ASSOC)){
+                            
+                    
+                ?>
                 <div class="work__img">
-                    <img id="myImgcer" src="assets/img/work1.jpg" alt="Snow" style="width:100%;max-width:300px">
+                    <img src="assets/img/<?php echo $rowc['img'] ?>" alt="" data-toggle="modal"
+                        data-target="#exampleModal<?php echo $rowc['id'] ?>">
                 </div>
-                <div class="work__img">
-                    <img id="myImgcer" src="assets/img/work1.jpg" alt="Snow" style="width:100%;max-width:300px">
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal<?php echo $rowc['id'] ?>" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel<?php echo $rowc['id'] ?>" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content" style="width: 700px; margin-left: -100px;">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel<?php echo $rowc['id'] ?>">
+                                    <?php echo $rowc['name'] ?> (<?php echo $rowc['date'] ?>)</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="width: 700px;">
+                                <img style="width: 700px;height: 500px;" src="assets/img/<?php echo $rowc['img'] ?>"
+                                    alt="<?php echo $rowc['name'] ?>">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="work__img">
-                    <img id="myImgcer" src="assets/img/work1.jpg" alt="Snow" style="width:100%;max-width:300px">
-                </div>
-                <div class="work__img">
-                    <img id="myImgcer" src="assets/img/work1.jpg" alt="Snow" style="width:100%;max-width:300px">
-                </div>
-                <div class="work__img">
-                    <img id="myImgcer" src="assets/img/work1.jpg" alt="Snow" style="width:100%;max-width:300px">
-                </div>
-                <div class="work__img">
-                    <img id="myImgcer" src="assets/img/work1.jpg" alt="Snow" style="width:100%;max-width:300px">
-                </div>
+                <?php   
+                    }
+                    mysqli_close($conn);
+                    }
+                    catch(Exception $e){
+                        'Caught exception: '.  $e->getMessage(). "\n";
+                    }
+                ?>
+
             </div>
         </section>
-
+        <?php
+            if (isset($_GET['msg'])) {
+                $msg=$_GET['msg'];
+                if ($msg == 'sucess') {
+                    echo '<script>alert("Thank you for send your massege \n I will see soon the massege")</script>';
+                } else {
+                    echo '<script>alert("'.$msg.'")</script>';
+                }
+            }
+        ?>
         <!--===== CONTACT =====-->
         <section class="contact section" id="contact">
             <h2 class="section-title">Contact</h2>
-
             <div class="contact__container bd-grid">
-                <form action="" class="contact__form">
-                    <input type="text" placeholder="Name" class="contact__input">
-                    <input type="mail" placeholder="Email" class="contact__input">
-                    <textarea name="" id="" cols="0" rows="10" class="contact__input"></textarea>
-                    <input type="button" value="Enviar" class="contact__button button">
+                <form action="resourse/contact.php" method="POST" class="contact__form">
+                    <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+                    <input type="text" name="name" placeholder="Name" class="contact__input">
+                    <input type="email" name="email" placeholder="Email" class="contact__input">
+                    <textarea placeholder="Write here your massege" name="content" cols="0" rows="10"
+                        class="contact__input"></textarea>
+                    <input type="submit" value="Send" class="contact__button button">
                 </form>
             </div>
         </section>
@@ -323,9 +319,53 @@
     <footer class="footer">
         <p class="footer__title">Marlon</p>
         <div class="footer__social">
-            <a href="#" class="footer__icon"><i class='bx bxl-facebook'></i></a>
-            <a href="#" class="footer__icon"><i class='bx bxl-instagram'></i></a>
-            <a href="#" class="footer__icon"><i class='bx bxl-twitter'></i></a>
+            <?php
+                $idicon=$row['id'];
+                try{
+                    require("admin/db/db.php");
+                    $qryicon ="SELECT *  FROM contact WHERE user=$idicon ";
+                    $verifyicon = mysqli_query($conn,$qryicon);
+                    while($rowicon = mysqli_fetch_array($verifyicon,MYSQLI_ASSOC)){
+                        $typecont =$rowicon['type'];
+
+                        if ($rowicon['type'] == 1 || $rowicon['type'] == 7 || $rowicon['type'] == 6 || $rowicon['type'] == 5) {
+                            ?>
+            <?php
+            try {
+                $qryycont ="SELECT *  FROM contacttype WHERE id=$typecont ";
+                $verifyycont = mysqli_query($conn, $qryycont);
+                $rowwcont = mysqli_fetch_assoc($verifyycont); ?>
+            <a data-toggle="tooltip" data-placement="top" title="<?php echo $rowicon['content']?>" href=""
+                class="footer__icon"><i class='<?php echo $rowwcont['icon'] ?>'></i></a>
+            <?php
+            } catch (Exception $e) {
+                'Caught exception: '.  $e->getMessage(). "\n";
+            } ?>
+            <?php
+                        }else{
+                            try {
+                                $qryycont ="SELECT *  FROM contacttype WHERE id=$typecont ";
+                                $verifyycont = mysqli_query($conn, $qryycont);
+                                $rowwcont = mysqli_fetch_assoc($verifyycont); ?>
+            <a target="_blank" href="<?php echo $rowicon['content']?>" class="footer__icon"><i
+                    class='<?php echo $rowwcont['icon'] ?>'></i></a>
+
+            <?php
+                            } catch (Exception $e) {
+                                'Caught exception: '.  $e->getMessage(). "\n";
+                            } ?>
+
+
+
+            <?php 
+                }                       
+            }
+            mysqli_close($conn);
+            }
+            catch(Exception $e){
+                'Caught exception: '.  $e->getMessage(). "\n";
+            }
+                ?>
         </div>
         <p style="margin-left: 100px;">&#169; 2020 copyright all right reserved <a href="admin/login.php"
                 style="opacity: 0;">ahemd</a> </ps>
@@ -333,35 +373,8 @@
 
 
     <!--===== fontawesome =====-->
-    <script src="https://kit.fontawesome.com/28d30b702d.js" crossorigin="anonymous"></script>
 
-    <!--===== SCROLL REVEAL =====-->
-    <script src="https://unpkg.com/scrollreveal"></script>
-
-    <!--===== MAIN JS =====-->
-    <script src="assets/js/main.js"></script>
-    <script>
-    // Get the modal
-    var modal = document.getElementById("myModalcer");
-
-    // Get the image and insert it inside the modal - use its "alt" text as a caption
-    var img = document.getElementById("myImgcer");
-    var modalImg = document.getElementById("img01");
-    var captionText = document.getElementById("captioncer");
-    img.onclick = function() {
-        modal.style.display = "block";
-        modalImg.src = this.src;
-        captionText.innerHTML = this.alt;
-    }
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("closecer")[0];
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-    </script>
+    <?php require "resourse/jsfile.php"; ?>
 </body>
 
 </html>

@@ -65,8 +65,7 @@
                     <div class="row justify-content-center">
                         <div class="col-xl-5 col-lg-6 col-md-8 px-5">
                             <h1 class="text-white">Welcome!</h1>
-                            <p class="text-lead text-white">Use these awesome forms to login or create new account in
-                                your project for free.</p>
+
                         </div>
                     </div>
                 </div>
@@ -134,9 +133,7 @@
                         <div class="col-6">
                             <a href="#" class="text-light"><small>Forgot password?</small></a>
                         </div>
-                        <div class="col-6 text-right">
-                            <a href="#" class="text-light"><small>Create new account</small></a>
-                        </div>
+
                     </div>
                 </div>
             </div>
