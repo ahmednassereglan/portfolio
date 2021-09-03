@@ -150,7 +150,7 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                     <tr>
                                         <th scope="col" class="sort">Name</th>
                                         <th scope="col" class="sort">Rate</th>
-                                        <th scope="col" class="sort">Rate</th>
+
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -179,19 +179,7 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                         <td class="budget">
                                             <?php echo $row['rate'] ?>%
                                         </td>
-                                        <td class="">
-                                            <div class="dropdown">
-                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item" href="#">Edit</a>
-                                                    <a class="dropdown-item" href="#">Delete</a>
 
-                                                </div>
-                                            </div>
-                                        </td>
                                     </tr>
                                     <?php
 

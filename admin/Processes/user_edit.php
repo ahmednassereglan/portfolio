@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $job=filter_var(trim($_POST["job"]), FILTER_SANITIZE_STRING);
     $social=filter_var(trim($_POST["social"]), FILTER_SANITIZE_STRING);
     $aboutme=filter_var(trim($_POST["aboutme"]), FILTER_SANITIZE_STRING);
-     $fileName =$_POST['image'];
+    $fileName =$_POST['image'];
 
     
     

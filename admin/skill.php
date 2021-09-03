@@ -62,9 +62,12 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
 
                                             if ($msg == 'sucess') {
                                                 $msg= 'Update Sucess';
-                                            } else {
-                                                $msg= 'There is something wrong';
-                                            } ?>
+
+                                            } elseif($msg == 'delete'){
+
+                                                $msg= 'delete Sucess';
+                                            }
+                                              ?>
                 <div class="col-8 offset-2">
                     <div class="alert <?php echo $color ?> alert-dismissible fade show" role="alert">
                         <strong><?php echo $msg ?></strong>
@@ -145,7 +148,7 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                     <tr>
                                         <th scope="col" class="sort">Name</th>
                                         <th scope="col" class="sort">Rate</th>
-                                        <th scope="col" class="sort">Rate</th>
+
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -181,8 +184,10 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item" href="#">Edit</a>
-                                                    <a class="dropdown-item" href="#">Delete</a>
+                                                    <a class="dropdown-item"
+                                                        href="skill_edit.php?idskill=<?php echo $row['id'] ?>">Edit</a>
+                                                    <a class="dropdown-item"
+                                                        href="Processes/skill_delete.php?idskill=<?php echo $row['id'] ?>">Delete</a>
 
                                                 </div>
                                             </div>

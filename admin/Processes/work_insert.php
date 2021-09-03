@@ -21,5 +21,5 @@ if(mysqli_error($conn)){
 }else{
 
     mysqli_close($conn);
-    header("location:../work.php?msg=sucess&color=alert-success");
+    header("location:../work.php?msg=insert&color=alert-success");
 }

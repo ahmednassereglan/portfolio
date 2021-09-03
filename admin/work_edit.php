@@ -62,13 +62,8 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
 
                                             if ($msg == 'sucess') {
                                                 $msg= 'Update Sucess';
-
-                                            } elseif($msg == 'delete'){
-
-                                                $msg= 'delete Sucess';
-                                            }elseif($msg == 'insert'){
-
-                                                $msg= 'insert Sucess';
+                                            } else {
+                                                $msg= 'There is something wrong';
                                             } ?>
                 <div class="col-8 offset-2">
                     <div class="alert <?php echo $color ?> alert-dismissible fade show" role="alert">
@@ -88,23 +83,35 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">Add Work </h3>
+                                    <h3 class="mb-0">edit Work </h3>
                                 </div>
 
                             </div>
                         </div>
                         <div class="card-body">
+                            <?php
+                                $idwork=$_GET['idwork'];
+                                $id=$_SESSION['user'];
+                                try{
+                                    require("db/db.php");
+                                    $qry ="SELECT *  FROM work WHERE user=$id AND id=$idwork LIMIT 1";
+                                    $verify = mysqli_query($conn,$qry);
+                                    while($row = mysqli_fetch_array($verify,MYSQLI_ASSOC)){
+                                    
+                            ?>
 
-                            <form action="Processes/work_insert.php" method="post" role="form">
+                            <form action="Processes/work_edit.php" method="post" role="form">
                                 <input type="hidden" name="id" value="<?php echo $_SESSION['user'] ?>">
-                                <h6 class="heading-small text-muted mb-4">Skill information</h6>
+                                <input type="hidden" name="idwork" value="<?php echo $row['id'] ?>">
+                                <h6 class="heading-small text-muted mb-4">Work information</h6>
                                 <div class="pl-lg-4">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-username">Name</label>
                                                 <input type="text" name="name" id="input-username" class="form-control"
-                                                    placeholder="Enter Name Of Project">
+                                                    placeholder="Enter Name Of Project"
+                                                    value="<?php echo $row['name'] ?>">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -119,91 +126,28 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-first-name">link</label>
                                                 <input type="text" name="link" id="input-first-name"
-                                                    class="form-control" placeholder="Enter Link Of Project">
+                                                    class="form-control" placeholder="Enter Link Of Project"
+                                                    value="<?php echo $row['link'] ?>">
                                             </div>
 
                                         </div>
 
                                     </div>
                                 </div>
-                                <input type="submit" class="btn btn-primary" value="Add">
+                                <input type="submit" class="btn btn-primary" value="edit">
                             </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="card bg-default shadow">
-                        <div class="card-header bg-transparent border-0">
-                            <h3 class="text-white mb-0">Work</h3>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table align-items-center table-dark table-flush">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col" class="sort">Project</th>
-
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody class="list">
-                                    <?php
-                                $id=$_SESSION['user'];
-                                try{
-                                    require("db/db.php");
-                                    $qry ="SELECT *  FROM work WHERE user=$id ";
-                                    $verify = mysqli_query($conn,$qry);
-                                    while($row = mysqli_fetch_array($verify,MYSQLI_ASSOC)){
-                                    
+                            <?php  
+                                }
+                                mysqli_close($conn);
+                                }
+                                catch(Exception $e){
+                                    'Caught exception: '.  $e->getMessage(). "\n";
+                                }
                             ?>
-                                    <tr>
-                                        <th scope="row">
-                                            <div class="media align-items-center">
-                                                <a href="#" class="mr-3">
-                                                    <img alt="Image placeholder"
-                                                        src="../assets/img/<?php echo $row['img'] ?>"
-                                                        style="width: 200px;height: 200px; border-radius: 50%;">
-                                                </a>
-                                                <div class="media-body">
-                                                    <a href="<?php echo $row['link'] ?>">
-                                                        <span
-                                                            class="name mb-0 text-sm text-white"><?php echo $row['name'] ?>
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </th>
-
-                                        <td class="">
-                                            <div class="dropdown">
-                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item"
-                                                        href="work_edit.php?idwork=<?php echo $row['id'] ?>">Edit</a>
-                                                    <a class="dropdown-item"
-                                                        href="Processes/work_delete.php?idwork=<?php echo $row['id'] ?>">Delete</a>
-
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <?php
-
-                                        
-                                    }
-                                    mysqli_close($conn);
-                                    }
-                                    catch(Exception $e){
-                                        'Caught exception: '.  $e->getMessage(). "\n";
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <!-- Footer -->
