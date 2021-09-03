@@ -25,7 +25,7 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
 <body>
 
     <!-- Sidenav -->
-    <?php $work='active' ?>
+    <?php $certificate='active' ?>
     <?php require "layouts/slider.php"; ?>
 
     <div class="main-content" id="panel">
@@ -62,8 +62,13 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
 
                                             if ($msg == 'sucess') {
                                                 $msg= 'Update Sucess';
-                                            } else {
-                                                $msg= 'There is something wrong';
+
+                                            } elseif($msg == 'delete'){
+
+                                                $msg= 'delete Sucess';
+                                            }elseif($msg == 'insert'){
+
+                                                $msg= 'insert Sucess';
                                             } ?>
                 <div class="col-8 offset-2">
                     <div class="alert <?php echo $color ?> alert-dismissible fade show" role="alert">
@@ -83,51 +88,50 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">Edit Work </h3>
+                                    <h3 class="mb-0">Edit Certificate </h3>
                                 </div>
 
                             </div>
                         </div>
                         <div class="card-body">
                             <?php
-                                $idwork=$_GET['idwork'];
+                                $idcertif=$_GET['idcertif'];
                                 $id=$_SESSION['user'];
                                 try{
                                     require("db/db.php");
-                                    $qry ="SELECT *  FROM work WHERE user=$id AND id=$idwork LIMIT 1";
+                                    $qry ="SELECT *  FROM `certificate` WHERE user=$id AND id=$idcertif LIMIT 1";
                                     $verify = mysqli_query($conn,$qry);
                                     while($row = mysqli_fetch_array($verify,MYSQLI_ASSOC)){
                                     
                             ?>
-
-                            <form action="Processes/work_edit.php" method="post" role="form">
+                            <form action="Processes/certificate_edit.php" method="POST">
                                 <input type="hidden" name="id" value="<?php echo $_SESSION['user'] ?>">
-                                <input type="hidden" name="idwork" value="<?php echo $row['id'] ?>">
-                                <h6 class="heading-small text-muted mb-4">Work information</h6>
+                                <input type="hidden" name="idcertif" value="<?php echo $row['id'] ?>">
+                                <h6 class="heading-small text-muted mb-4">Certificate information</h6>
                                 <div class="pl-lg-4">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-username">Name</label>
-                                                <input type="text" name="name" id="input-username" class="form-control"
-                                                    placeholder="Enter Name Of Project"
+                                                <label class="form-control-label"
+                                                    for="input-Certificate">Certificate</label>
+                                                <input type="text" name="named" id="input-Certificate"
+                                                    class="form-control" placeholder="Enter Name Of Certificate"
                                                     value="<?php echo $row['name'] ?>">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-country">Img</label>
-                                                <input type="file" name="image" id="input-country" class="form-control">
+                                                <label class="form-control-label" for="input-image">Img</label>
+                                                <input type="file" name="imaged" id="input-image" class="form-control">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-8 offset-2 ">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-first-name">link</label>
-                                                <input type="text" name="link" id="input-first-name"
-                                                    class="form-control" placeholder="Enter Link Of Project"
-                                                    value="<?php echo $row['link'] ?>">
+                                                <label class="form-control-label" for="input-datecer">date</label>
+                                                <input type="date" name="dated" id="input-datecer" class="form-control"
+                                                    value="<?php echo $row['date'] ?>">
                                             </div>
 
                                         </div>

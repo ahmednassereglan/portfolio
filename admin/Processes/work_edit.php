@@ -10,7 +10,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $image =$_POST["image"];
     $link =$_POST["link"];
 
-    $qry ="UPDATE `work` SET `name`='$name',`img`='$image',`link`='$link' WHERE `id`=$idwork and `user`='$id'";
+    if($image == ""){
+        $qry ="UPDATE `work` SET `name`='$name',`link`='$link' WHERE `id`=$idwork and `user`='$id'";
+    }else{
+        $qry ="UPDATE `work` SET `name`='$name',`img`='$image',`link`='$link' WHERE `id`=$idwork and `user`='$id'";
+    
+    }
+
     
     $rslt = mysqli_query($conn, $qry);
 

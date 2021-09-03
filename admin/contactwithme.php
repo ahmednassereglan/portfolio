@@ -60,8 +60,8 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                             $msg=$_GET['msg'];
                                             $color=$_GET['color'];
 
-                                            if ($msg == 'sucess') {
-                                                $msg= 'Update Sucess';
+                                            if ($msg == 'seen') {
+                                                $msg= 'New Massege';
                                             } else {
                                                 $msg= 'There is something wrong';
                                             } ?>

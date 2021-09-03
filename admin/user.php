@@ -50,8 +50,13 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
 
                                             if ($msg == 'sucess') {
                                                 $msg= 'Update Sucess';
-                                            } else {
-                                                $msg= 'There is something wrong';
+
+                                            } elseif($msg == 'delete'){
+
+                                                $msg= 'delete Sucess';
+                                            }elseif($msg == 'insert'){
+
+                                                $msg= 'insert Sucess';
                                             } ?>
                     <div class="col-8 offset-2">
                         <div class="alert <?php echo $color ?> alert-dismissible fade show" role="alert">

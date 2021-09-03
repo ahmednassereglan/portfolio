@@ -39,19 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <ul class="navbar-nav mr-auto">
 
-                    <li class="nav-item">
-                        <a href="login.php" class="nav-link">
-                            <span class="nav-link-inner--text">Login</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="register.php" class="nav-link">
-                            <span class="nav-link-inner--text">Register</span>
-                        </a>
-                    </li>
-                </ul>
 
             </div>
         </div>
@@ -63,10 +51,7 @@
             <div class="container">
                 <div class="header-body text-center mb-7">
                     <div class="row justify-content-center">
-                        <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-                            <h1 class="text-white">Welcome!</h1>
 
-                        </div>
                     </div>
                 </div>
             </div>
@@ -127,47 +112,13 @@
                             </form>
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-6">
-                            <a href="forgetpassword.php" class="text-light"><small>Forgot password?</small></a>
-                        </div>
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Footer -->
-    <footer class="py-5" id="footer-main">
-        <div class="container">
-            <div class="row align-items-center justify-content-xl-between">
-                <div class="col-xl-6">
-                    <div class="copyright text-center text-xl-left text-muted">
-                        &copy; 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1"
-                            target="_blank">Creative Tim</a>
-                    </div>
-                </div>
-                <div class="col-xl-6">
-                    <ul class="nav nav-footer justify-content-center justify-content-xl-end">
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About
-                                Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md"
-                                class="nav-link" target="_blank">MIT License</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
+
     <!-- Argon Scripts -->
     <!-- Core -->
     <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>

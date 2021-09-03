@@ -24,5 +24,5 @@ require("../db/db.php");
     }else{
 
         mysqli_close($conn);
-        header("location:../certificate.php?msg=sucess&color=alert-success");
+        header("location:../certificate.php?msg=insert&color=alert-success");
     }

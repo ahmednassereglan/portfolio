@@ -60,11 +60,16 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                             $msg=$_GET['msg'];
                                             $color=$_GET['color'];
 
-                                            // if ($msg == 'sucess') {
-                                            //     $msg= 'Update Sucess';
-                                            // } else {
-                                            //     $msg= 'There is something wrong';
-                                            // } ?>
+                                            if ($msg == 'sucess') {
+                                                $msg= 'Update Sucess';
+
+                                            } elseif($msg == 'delete'){
+
+                                                $msg= 'delete Sucess';
+                                            }elseif($msg == 'insert'){
+
+                                                $msg= 'insert Sucess';
+                                            } ?>
                 <div class="col-8 offset-2">
                     <div class="alert <?php echo $color ?> alert-dismissible fade show" role="alert">
                         <strong><?php echo $msg ?></strong>
@@ -129,7 +134,7 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                 <div class="col-12">
                     <div class="card bg-default shadow">
                         <div class="card-header bg-transparent border-0">
-                            <h3 class="text-white mb-0">Work</h3>
+                            <h3 class="text-white mb-0">Certificate</h3>
                         </div>
                         <div class="table-responsive">
                             <table class="table align-items-center table-dark table-flush">
@@ -179,8 +184,10 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item" href="#">Edit</a>
-                                                    <a class="dropdown-item" href="#">Delete</a>
+                                                    <a class="dropdown-item"
+                                                        href="certificate_edit.php?idcertif=<?php echo $row['id'] ?>">Edit</a>
+                                                    <a class="dropdown-item"
+                                                        href="Processes/certificate_delete.php?idcertif=<?php echo $row['id'] ?>">Delete</a>
 
                                                 </div>
                                             </div>

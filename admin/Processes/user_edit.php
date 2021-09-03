@@ -25,10 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
     
         
-    if(mysqli_error($conn)){
+    if($mmm==mysqli_error($conn)){
 
         mysqli_close($conn);
-        header("location:../user.php?msg=false&color=alert-danger");
+        header("location:../user.php?msg=$mmm&color=alert-danger");
     }else{
 
         mysqli_close($conn);
@@ -36,6 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }else{
     mysqli_close($conn);
-    header("location: ../user.php?msg=false&color=alert-danger");
+    header("location: ../user.php?msg=$mmm&color=alert-danger");
     
 }

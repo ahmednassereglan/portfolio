@@ -66,6 +66,9 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                             } elseif($msg == 'delete'){
 
                                                 $msg= 'delete Sucess';
+                                            }elseif($msg == 'insert'){
+
+                                                $msg= 'insert Sucess';
                                             }
                                               ?>
                 <div class="col-8 offset-2">
@@ -88,9 +91,7 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                                 <div class="col-8">
                                     <h3 class="mb-0">Add Skill </h3>
                                 </div>
-                                <div class="col-4 text-right">
-                                    <a href="#!" class="btn btn-sm btn-primary">Settings</a>
-                                </div>
+
                             </div>
                         </div>
                         <div class="card-body">

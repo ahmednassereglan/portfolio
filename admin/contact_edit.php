@@ -25,7 +25,7 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
 <body>
 
     <!-- Sidenav -->
-    <?php $work='active' ?>
+    <?php $contact='active' ?>
     <?php require "layouts/slider.php"; ?>
 
     <div class="main-content" id="panel">
@@ -83,58 +83,66 @@ if(!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">Edit Work </h3>
+                                    <h3 class="mb-0">Add Contact </h3>
                                 </div>
 
                             </div>
                         </div>
                         <div class="card-body">
                             <?php
-                                $idwork=$_GET['idwork'];
+                                $idcont=$_GET['idcont'];
                                 $id=$_SESSION['user'];
                                 try{
                                     require("db/db.php");
-                                    $qry ="SELECT *  FROM work WHERE user=$id AND id=$idwork LIMIT 1";
+                                    $qry ="SELECT *  FROM `contact` WHERE user=$id AND id=$idcont LIMIT 1";
                                     $verify = mysqli_query($conn,$qry);
                                     while($row = mysqli_fetch_array($verify,MYSQLI_ASSOC)){
                                     
                             ?>
 
-                            <form action="Processes/work_edit.php" method="post" role="form">
+                            <form action="Processes/contact_edit.php" method="post" role="form">
                                 <input type="hidden" name="id" value="<?php echo $_SESSION['user'] ?>">
-                                <input type="hidden" name="idwork" value="<?php echo $row['id'] ?>">
-                                <h6 class="heading-small text-muted mb-4">Work information</h6>
+                                <input type="hidden" name="idcont" value="<?php echo $row['id'] ?>">
+                                <h6 class="heading-small text-muted mb-4">Contact information</h6>
                                 <div class="pl-lg-4">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-username">Name</label>
+                                                <label class="form-control-label" for="input-username">content</label>
                                                 <input type="text" name="name" id="input-username" class="form-control"
-                                                    placeholder="Enter Name Of Project"
-                                                    value="<?php echo $row['name'] ?>">
+                                                    placeholder="ex@exmpl.com" value="<?php echo $row['content'] ?>">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-country">Img</label>
-                                                <input type="file" name="image" id="input-country" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-8 offset-2 ">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-first-name">link</label>
-                                                <input type="text" name="link" id="input-first-name"
-                                                    class="form-control" placeholder="Enter Link Of Project"
-                                                    value="<?php echo $row['link'] ?>">
+                                                <label class="form-control-label" for="input-city">Type</label>
+                                                <select name="type" class="form-control" required>
+                                                    <?php
+                                                    try{
+                                                        require("db/db.php");
+                                                        $qry ="SELECT *  FROM contacttype";
+                                                        $verify = mysqli_query($conn,$qry);
+                                                        while($row = mysqli_fetch_array($verify,MYSQLI_ASSOC)){
+                                                        
+                                                    ?>
+                                                    <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?>
+                                                    </option>
+                                                    <?php
+                                                    }
+                                                    
+                                                    }
+                                                    catch(Exception $e){
+                                                        'Caught exception: '.  $e->getMessage(). "\n";
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
 
                                         </div>
-
                                     </div>
+
                                 </div>
-                                <input type="submit" class="btn btn-primary" value="edit">
+                                <input type="submit" class="btn btn-primary" value="Add">
                             </form>
                             <?php  
                                 }

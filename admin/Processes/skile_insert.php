@@ -13,12 +13,12 @@ $rslt = mysqli_query($conn ,$qry);
 mysqli_close($conn);
 
 
-if(mysqli_error($conn)){
+if($mmm==mysqli_error($conn)){
 
     mysqli_close($conn);
-    header("location:../skill.php?msg=false&color=alert-danger");
+    header("location:../skill.php?msg=$mmm&color=alert-danger");
 }else{
 
     mysqli_close($conn);
-    header("location:../skill.php?msg=sucess&color=alert-success");
+    header("location:../skill.php?msg=insert&color=alert-success");
 }

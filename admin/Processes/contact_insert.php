@@ -22,5 +22,5 @@ require("../db/db.php");
     }else{
 
         mysqli_close($conn);
-        header("location:../contact.php?msg=sucess&color=alert-success");
+        header("location:../contact.php?msg=insert&color=alert-success");
     }
