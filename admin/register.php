@@ -181,7 +181,7 @@
                                     <div class="form-group">
                                         <label for="exampleInputFName">Security Question</label>
                                         <select name="securityQuestion" class="form-control" required>
-                                            <option value=""></option>
+
                                             <option value="What was your childhood nickname?">What was your childhood
                                                 nickname?</option>
                                             <option value="What was the last name of your third grade teacher?">What was
