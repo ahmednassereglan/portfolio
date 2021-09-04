@@ -170,7 +170,17 @@
                                                 type="password">
                                         </div>
                                     </div>
-
+                                    <div class="form-group">
+                                        <label for="exampleInputFName">Confirm password</label>
+                                        <div class="input-group input-group-merge input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="ni ni-lock-circle-open"></i></span>
+                                            </div>
+                                            <input name="confirmpassword" class="form-control"
+                                                placeholder="Enter Password" type="password">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div style="overflow:auto;">
                                     <div style="float:right;">

@@ -37,7 +37,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             
         }else{
             mysqli_close($conn);
-            header("location: ../login.php?msg=false");
+            header("location: ../login.php?msg=There is something wrong");
             
         }
         
