@@ -13,7 +13,7 @@ $rslt = mysqli_query($conn ,$qry);
 mysqli_close($conn);
 
 
-if($mmm==mysqli_error($conn)){
+if($mmm = mysqli_error($conn)){
 
     mysqli_close($conn);
     header("location:../skill.php?msg=$mmm&color=alert-danger");
